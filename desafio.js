@@ -1,66 +1,136 @@
-class productManager{
+const fs = require('fs');
 
-    constructor(){
-        this.producto=[];
+class ProductManager {
+    constructor(filePath) {
+        this.path = filePath;
+        this.products = [];
+        this.loadProducts();
     }
-    addProductos(title,description,price,thumbnail,stock){
-        let nCode;
-        if(!this.producto.length){
-            nCode=1;
-        } else {
-            nCode = this.producto[this.producto.length-1].code+1
-        };
-        const nProducto = {
-            code:nCode,
-            title,
-            description,
-            price,
-            thumbnail,
-            stock,
-        };
-        this.producto.push(nProducto);
-        console.log("nuevo producto creado");
-    };
-    getProducts(){
-        return this.producto;
-    };
 
-    getElementById(codeProducto){
-        //evaluar que el evento exista.
-        const productoE = this.producto.some((producto)=>{return producto.code === codeProducto});
-        if(!productoE){
-            console.log("Producto no existente")
-        } else {
-            console.log("Producto existente")
-
+    loadProducts() {
+        try {
+            const data = fs.readFileSync(this.path, 'utf8');
+            if (data) {
+                this.products = JSON.parse(data);
+            }
+        } catch (err) {
+            return []
+            //console.error('Error loading products:', err);
         }
     }
 
+    saveProducts() {
+        try {
+            fs.writeFileSync(this.path, JSON.stringify(this.products, null, 2));
+        } catch (err) {
+            console.error('Error saving products:', err);
+        }
+    }
 
+    generateCode() {
+        return this.products.length > 0
+            ? Math.max(...this.products.map((product) => product.code)) + 1
+            : 1;
+    }
 
+    addProduct(product) {
+        if (!product.title || product.title == "" || !product.description || product.description == "" || !product.price || product.price == 0 || !product.thumbnail || product.thumbnail == ""  || !product.stock) {
+            console.error('All fields are required');
+            return;
+        }
+
+        const existingProduct = this.products.find((p) => p.code === product.code);
+        if (existingProduct) {
+            console.error('Product with the same code already exists');
+            return;
+        }
+
+        const newProduct = {
+          
+            title: product.title,
+            description: product.description,
+            price: product.price,
+            thumbnail: product.thumbnail,
+            code: this.generateCode(),
+            stock: product.stock,
+        };
+
+        this.products.push(newProduct);
+        this.saveProducts();
+    }
+
+    getProducts() {
+        return this.products;
+    }
+
+    getProductById(code) {
+        const product = this.products.find((p) => p.code === code);
+        if (!product) {
+            console.error('Not found');
+            return;
+        }
+        return product;
+    }
+
+    updateProduct(code, updatedFields) {
+        const productIndex = this.products.findIndex((p) => p.code === code);
+        if (productIndex === -1) {
+            console.error('Not found');
+            return;
+        } else {
+            console.log("Producto para update encontrado!");
+        }
+
+        const updatedProduct = { ...this.products[productIndex], ...updatedFields };
+        this.products[productIndex] = updatedProduct;
+        this.saveProducts();
+    }
+
+    deleteProduct(code) {
+        const productIndex = this.products.findIndex((p) => p.code === code);
+        if (productIndex === -1) {
+            console.error('Not found');
+            return;
+        }
+
+        this.products.splice(productIndex, 1);
+        this.saveProducts();
+    }
 }
 
-const bruno = new productManager();
-
-console.log("Productos: ",bruno.getProducts());
-
-console.log("------------------------------------")
-
-bruno.addProductos("Playstatio","maquina para jugar videojuegos",170000,"sin imagen",5)
-
-console.log("------------------------------------")
-
-bruno.addProductos("telefono","dispositivo para comunicarse",65000,"sin imagen",10)
 
 
-console.log("------------------------------------")
+const bruno = new ProductManager('products.json');
 
+console.log("Productos cargados: ",bruno.getProducts());
 
-bruno.getElementById(1);
+const product1 = {
+    title: 'producto prueba',
+    description: 'Este es un producto prueba',
+    price: 200,
+    thumbnail: 'Sin imagen',
+    stock: 25,
+};
+bruno.addProduct(product1);
 
-console.log("------------------------------------")
+const product2 = {
+    title: 'producto prueba',
+    description: 'Este es un producto prueba',
+    price: 200,
+    thumbnail: 'Sin imagen',
+    stock: 25,
+};
+bruno.addProduct(product2);
 
+console.log("Productos cargados: ",bruno.getProducts());
 
-console.log("Productos: ",bruno.getProducts());
+const productCode = 1;
+const foundProduct = bruno.getProductById(productCode);
+console.log("Producto por code: ",foundProduct);
 
+const updatedFields = { price: 250 };
+bruno.updateProduct(productCode, updatedFields);
+
+bruno.deleteProduct(productCode);
+console.log("Productos cargados: ",bruno.getProducts());
 
