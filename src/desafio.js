@@ -1,14 +1,6 @@
+import fs from "fs";
 
-
-const fs = require('fs');
-
-const port = 8080;
-
-app.listen(port,()=>console.log(`El servidor esta escuchando en el puerto ${port}`));
-
-
-
-class ProductManager {
+export class ProductManager {
     constructor(filePath) {
         this.path = filePath;
         this.products = [];
