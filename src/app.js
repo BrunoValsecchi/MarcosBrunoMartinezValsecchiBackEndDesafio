@@ -1,6 +1,6 @@
 // const express = require("express");
 import express from "express";
-import { ProductManager } from "./ProductManager.js";
+import { ProductManager } from "./desafio.js";
 
 
 const port = 8080;
