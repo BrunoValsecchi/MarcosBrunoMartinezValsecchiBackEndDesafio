@@ -16,7 +16,6 @@ router.post("/", async (req, res) => {
     }
 });
 
-// Traigo todos los carritos
 router.get("/", async (req, res) => {
     try {
         let limit = Number(req.query.limit);
@@ -32,7 +31,6 @@ router.get("/", async (req, res) => {
     }
 });
 
-// Traigo carrito segun ID
 router.get('/:cid', async (req, res) => {
     try {
         let cid = req.params.cid;
