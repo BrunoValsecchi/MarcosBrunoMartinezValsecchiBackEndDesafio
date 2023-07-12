@@ -1,6 +1,6 @@
 [
 	{
-		"id": "d070afa8-63d9-478c-b388-98178830caac",
+		"id": "32b387f0-20f5-11ee-be56-0242ac120002",
 		"title": "el libro de la selva",
 		"description": "libro ficcion",
 		"price": 400,
@@ -11,7 +11,7 @@
 		"category": "libro"
 	},
 	{
-		"id": "4b3d41e8-d374-4569-b30f-13f91bc7edb2",
+		"id": "32b38ab6-20f5-11ee-be56-0242ac120002",
 		"title": "los juegos del hambre",
 		"description": "libro ficcion",
 		"price": 1000,
@@ -22,7 +22,7 @@
 		"category": "libro"
 	},
 	{
-		"id": "857295ab-2cee-436f-8c3b-eff91d5f7acd",
+		"id": "32b38c14-20f5-11ee-be56-0242ac120002",
 		"title": "el señor de los anillos",
 		"description": "libro ficcion",
 		"price": 500,
