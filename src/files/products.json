@@ -1,42 +1,35 @@
 [
-  {
-    "title": "producto prueba",
-    "description": "Este es un producto prueba",
-    "price": 200,
-    "thumbnail": "Sin imagen",
-    "code": 2,
-    "stock": 25
-  },
-  {
-    "title": "producto prueba",
-    "description": "Este es un producto prueba",
-    "price": 200,
-    "thumbnail": "Sin imagen",
-    "code": 3,
-    "stock": 25
-  },
-  {
-    "title": "producto prueba",
-    "description": "Este es un producto prueba",
-    "price": 200,
-    "thumbnail": "Sin imagen",
-    "code": 4,
-    "stock": 25
-  },
-  {
-    "title": "producto prueba",
-    "description": "Este es un producto prueba",
-    "price": 200,
-    "thumbnail": "Sin imagen",
-    "code": 5,
-    "stock": 25
-  },
-  {
-    "title": "producto prueba",
-    "description": "Este es un producto prueba",
-    "price": 200,
-    "thumbnail": "Sin imagen",
-    "code": 6,
-    "stock": 25
-  }
+	{
+		"id": "d070afa8-63d9-478c-b388-98178830caac",
+		"title": "el libro de la selva",
+		"description": "libro ficcion",
+		"price": 400,
+		"thumbnail": "",
+		"code": "lib501",
+		"stock": 50,
+		"status": true,
+		"category": "libro"
+	},
+	{
+		"id": "4b3d41e8-d374-4569-b30f-13f91bc7edb2",
+		"title": "los juegos del hambre",
+		"description": "libro ficcion",
+		"price": 1000,
+		"thumbnail": "",
+		"code": "lib502",
+		"stock": 200,
+		"status": true,
+		"category": "libro"
+	},
+	{
+		"id": "857295ab-2cee-436f-8c3b-eff91d5f7acd",
+		"title": "el señor de los anillos",
+		"description": "libro ficcion",
+		"price": 500,
+		"thumbnail": "",
+		"code": "lib503",
+		"stock": 90,
+		"status": true,
+		"category": "libro"
+	}
 ]
