@@ -1,8 +1,11 @@
+import {__dirname} from "../../src/utils.js";
+import path from "path";
 import fs from "fs";
+import {v4 as uuidv4} from 'uuid';
 
 export class ProductManager {
     constructor(filePath) {
-        this.path = filePath;
+        this.path=path.join(__dirname,`/files/${filePath}`); //src/files/products.json
         this.products = [];
         this.loadProducts();
     }
@@ -28,10 +31,13 @@ export class ProductManager {
     }
 
     generateCode() {
-        return this.products.length > 0
+        let newId = uuidv4();
+        return newId
+        /*return this.products.length > 0
             ? Math.max(...this.products.map((product) => product.code)) + 1
-            : 1;
-    }
+            : 1;*/
+    
+        }
 
     addProduct(product) {
         if (!product.title || product.title == "" || !product.description || product.description == "" || !product.price || product.price == 0 || !product.thumbnail || product.thumbnail == ""  || !product.stock) {
