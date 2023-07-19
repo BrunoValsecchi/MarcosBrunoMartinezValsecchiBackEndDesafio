@@ -26,7 +26,7 @@ export class ProductManager {
             console.log("loadProducts: ", this.products);
             return this.products;
         } catch (error) {
-            console.error('Error loading products:', error);
+            throw new Error("Producto no encontrado", error);
             return [];
         }
     }
@@ -41,20 +41,20 @@ export class ProductManager {
         try {
             await fs.promises.writeFile(this.path, JSON.stringify(this.products, null, 2));
         } catch (error) {
-            console.error('Error saving products:', error);
+            throw new Error('Error saving products:', error);
         }
     }
 
     addProduct(product) {
         if (!product.title || product.title == "" || !product.description || product.description == "" || !product.price || product.price == 0 || !product.code || product.code == "" || !product.stock || !product.status || product.category == "" || !product.category) {
-            console.error('All fields are required');
-            return;
+            throw new Error('All fields are required');
+            
         }
 
         const existingProduct = this.products.find((p) => p.code === product.code);
         if (existingProduct) {
-            console.error('Product with the same code already exists');
-            return;
+            throw new Error('Product with the same code already exists');
+            
         }
 
         const newProduct = {
@@ -81,7 +81,7 @@ export class ProductManager {
     getProductById(id) {
         const product = this.products.find((p) => p.id === id);
         if (!product) {
-            console.error('Not found');
+            throw new Error('Not found');
             return;
         }
         return product;
@@ -90,8 +90,8 @@ export class ProductManager {
     updateProduct(id, updatedFields) {
         const productIndex = this.products.findIndex((p) => p.id === id);
         if (productIndex === -1) {
-            console.error('Not found');
-            return;
+            throw new Error('Not found');
+            
         } else {
             console.log("Producto para update encontrado!");
         }
@@ -104,8 +104,8 @@ export class ProductManager {
     deleteProduct(id) {
         const productIndex = this.products.findIndex((p) => p.id === id);
         if (productIndex === -1) {
-            console.error('Not found');
-            return;
+            throw new Error('Not found');
+            
         }
 
         this.products.splice(productIndex, 1);

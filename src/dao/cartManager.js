@@ -32,7 +32,7 @@ export class CartManager {
 
     async getCartById(id) {
         try {
-            if (this.existsFile()) {
+            if (this.fileExists()) {
                 let data = await fs.promises.readFile(this.path, 'utf-8');
                 this.carts = JSON.parse(data);
             } else {

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ProductManager } from "../../src/dao/desafio.js";
+import { ProductManager } from "../../src/dao/productManager.js";
 import { __dirname } from '../utils.js';
 
 const productService = new ProductManager('/products.json');
