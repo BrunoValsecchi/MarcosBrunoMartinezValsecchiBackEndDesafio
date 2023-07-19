@@ -1,0 +1,16 @@
+<h1>hola mundo</h1>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/home.js"></script>
+
+
+{{#if isProduct}}
+   {{#each productList}}
+     <p>titulo: {{this.title}}</p>
+     <p>descripcion: {{this.description}}</p>
+    <p>precio: {{this.price}}</p>
+    {{/each}}
+    {{else}}
+    <p>producto no encontrado</p>
+
+    {{/if}}
